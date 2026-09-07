@@ -31,11 +31,75 @@ function getTargetEmail() {
 /* =========================================
    DOM ELEMENTS
 ========================================= */
+const generatorStep = document.getElementById("generatorStep");
+const generateLinkBtn = document.getElementById("generateLinkBtn");
+const senderEmailInput = document.getElementById("senderEmailInput");
+const generatedLinkContainer = document.getElementById("generatedLinkContainer");
+const generatedLinkInput = document.getElementById("generatedLinkInput");
+const copyLinkBtn = document.getElementById("copyLinkBtn");
+const copyStatus = document.getElementById("copyStatus");
+const startPreviewBtn = document.getElementById("startPreviewBtn");
+
 const nextNameBtn = document.getElementById("nextNameBtn");
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
 const submitBtn = document.getElementById("submitBtn");
 const feedbackBtn = document.getElementById("feedbackBtn");
+
+/* =========================================
+   ROUTING ON INITIAL LOAD
+========================================= */
+window.addEventListener("DOMContentLoaded", () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const hasRecipient = urlParams.has("to");
+    const isCreateMode = urlParams.get("mode") === "create";
+
+    // If no recipient is set in URL or mode=create, show the Link Generator screen
+    if (!hasRecipient || isCreateMode) {
+        showStep("generatorStep");
+    } else {
+        showStep("step1");
+    }
+});
+
+/* =========================================
+   LINK GENERATOR LOGIC
+========================================= */
+if (generateLinkBtn) {
+    generateLinkBtn.addEventListener("click", () => {
+        const email = senderEmailInput.value.trim();
+        if (!email || !email.includes("@")) {
+            alert("Please enter a valid email address!");
+            return;
+        }
+
+        const baseUrl = window.location.origin + window.location.pathname;
+        const customLink = `${baseUrl}?to=${encodeURIComponent(email)}`;
+
+        generatedLinkInput.value = customLink;
+        generatedLinkContainer.style.display = "block";
+    });
+}
+
+if (copyLinkBtn) {
+    copyLinkBtn.addEventListener("click", () => {
+        generatedLinkInput.select();
+        navigator.clipboard.writeText(generatedLinkInput.value)
+            .then(() => {
+                copyStatus.textContent = "Link copied to clipboard! 📋✨";
+                setTimeout(() => { copyStatus.textContent = ""; }, 3000);
+            })
+            .catch(() => {
+                copyStatus.textContent = "Failed to copy. Please select and copy manually.";
+            });
+    });
+}
+
+if (startPreviewBtn) {
+    startPreviewBtn.addEventListener("click", () => {
+        showStep("step1");
+    });
+}
 
 /* =========================================
    EVENT LISTENERS
@@ -55,17 +119,16 @@ if (feedbackBtn) feedbackBtn.addEventListener("click", sendFeedback);
 /* =========================================
    STEP NAVIGATION
 ========================================= */
-function nextStep(stepNumber) {
+function showStep(stepId) {
     const steps = document.querySelectorAll(".step");
+    steps.forEach(step => step.classList.remove("active"));
 
-    steps.forEach(step => {
-        step.classList.remove("active");
-    });
+    const targetStep = document.getElementById(stepId);
+    if (targetStep) targetStep.classList.add("active");
+}
 
-    const nextStepElement = document.getElementById(`step${stepNumber}`);
-    if (nextStepElement) {
-        nextStepElement.classList.add("active");
-    }
+function nextStep(stepNumber) {
+    showStep(`step${stepNumber}`);
 }
 
 /* =========================================

@@ -278,4 +278,29 @@ button:disabled {
     button {
         width: 100%;
     }
+
+/* =========================================
+LINK GENERATOR STYLES
+========================================= */
+.generated-link-box {
+    background: #fff0f5;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 15px 0;
+    border: 2px dashed #ffb6c1;
+}
+
+.secondary-btn {
+    background: transparent;
+    color: #d63384;
+    border: 2px solid #d63384;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.secondary-btn:hover {
+    background: #ffe0ec;
+    box-shadow: none;
+}
+
 }

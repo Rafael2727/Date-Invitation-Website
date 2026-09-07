@@ -18,6 +18,32 @@
   <body>
     <main class="card">
       <!-- =========================
+            LINK GENERATOR (MODAL / OVERLAY)
+        ========================== -->
+      <section id="generatorStep" class="step">
+        <h1>Create Your Date Link 💌</h1>
+        <p>Enter your email address so your date's responses get sent straight to your inbox!</p>
+
+        <input
+          type="email"
+          id="senderEmailInput"
+          placeholder="your.email@example.com"
+          required
+        />
+
+        <button id="generateLinkBtn" type="button" class="full-width-btn">Generate Invitation Link ✨</button>
+
+        <div id="generatedLinkContainer" class="generated-link-box" style="display: none;">
+          <label class="label-text">Your Personal Invitation Link:</label>
+          <input type="text" id="generatedLinkInput" readonly />
+          <button id="copyLinkBtn" type="button" class="full-width-btn">Copy Link 📋</button>
+          <p id="copyStatus" class="small-text" style="color: #d63384; margin-top: 5px;"></p>
+        </div>
+
+        <button id="startPreviewBtn" type="button" class="secondary-btn">Preview Invitation Site ➔</button>
+      </section>
+
+      <!-- =========================
             STEP 1: ENTER NAME
         ========================== -->
       <section id="step1" class="step active">
