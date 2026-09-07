@@ -6,7 +6,6 @@ const EMAILJS_SERVICE_ID = "service_ew9gjz1";
 const EMAILJS_TEMPLATE_ID = "template_g5kwrzq";
 const FEEDBACK_TEMPLATE_ID = "template_2emas1m";
 
-// Default developer email fallback
 const DEFAULT_DEV_EMAIL = "rafaelbatnag.dev@gmail.com";
 
 /* =========================================
@@ -16,7 +15,7 @@ const DEFAULT_DEV_EMAIL = "rafaelbatnag.dev@gmail.com";
     if (typeof emailjs !== "undefined") {
         emailjs.init(EMAILJS_PUBLIC_KEY);
     } else {
-        console.warn("EmailJS SDK is not loaded. If using Brave Browser, disable Shields for localhost.");
+        console.warn("EmailJS SDK is not loaded. Disable Brave Shields or AdBlock if testing locally.");
     }
 })();
 
@@ -179,17 +178,11 @@ function dodgeNoButton(event) {
     }, 60);
 }
 
-/* =========================================
-   NO BUTTON EVENTS
-========================================= */
 if (noBtn) {
     noBtn.addEventListener("pointerdown", dodgeNoButton, { passive: false });
     noBtn.addEventListener("mouseenter", dodgeNoButton);
 }
 
-/* =========================================
-   WINDOW RESIZE HANDLING
-========================================= */
 window.addEventListener("resize", () => {
     if (!noBtn || !noBtn.classList.contains("dodging")) {
         return;
@@ -260,11 +253,10 @@ async function finishSelection(event) {
     document.getElementById("summaryPlace").textContent = selectedPlace.value;
     document.getElementById("summaryActivity").textContent = activity;
 
-    // Get the dynamic recipient email from URL parameter ?to=email
     const recipientEmail = getTargetEmail();
 
     const templateParams = {
-        target_email: recipientEmail, // Routes date response to link owner
+        target_email: recipientEmail,
         user_name: name,
         date: date,
         time: time,
@@ -285,7 +277,6 @@ async function finishSelection(event) {
             console.log(`Invitation response sent to ${recipientEmail}`);
         } catch (error) {
             console.error("Email sending failed:", error);
-            alert("Invitation recorded, but failed to send email: " + (error.text || error.message || "Unknown error"));
         } finally {
             submitBtn.disabled = false;
             submitBtn.textContent = "Submit Choice ❤️";
@@ -297,23 +288,28 @@ async function finishSelection(event) {
 }
 
 /* =========================================
-   CONFETTI CELEBRATION
+   CONFETTI CELEBRATION (FIXED & RELIABLE)
 ========================================= */
 function celebrate() {
-    if (typeof confetti === "undefined") return;
+    const confettiFunc = window.confetti || (typeof confetti !== "undefined" ? confetti : null);
+
+    if (!confettiFunc) {
+        console.warn("Confetti CDN script not found.");
+        return;
+    }
 
     const duration = 3000;
     const end = Date.now() + duration;
 
     (function frame() {
-        confetti({
+        confettiFunc({
             particleCount: 6,
             angle: 60,
             spread: 55,
             origin: { x: 0 }
         });
 
-        confetti({
+        confettiFunc({
             particleCount: 6,
             angle: 120,
             spread: 55,
@@ -327,20 +323,20 @@ function celebrate() {
 }
 
 /* =========================================
-   SEND FEEDBACK (STAYS WITH DEVELOPER)
+   SEND FEEDBACK
 ========================================= */
 async function sendFeedback(event) {
     if (event) event.preventDefault();
 
     const feedbackName = document.getElementById("feedbackName").value.trim();
     const feedbackMessage = document.getElementById("feedbackMessage").value.trim();
+    const statusDiv = document.getElementById("feedbackStatus");
 
     if (!feedbackMessage) {
         alert("Please write your feedback first!");
         return;
     }
 
-    // Always routes feedback to your developer template
     const feedbackParams = {
         name: feedbackName || "Anonymous",
         message: feedbackMessage
@@ -348,6 +344,7 @@ async function sendFeedback(event) {
 
     feedbackBtn.disabled = true;
     feedbackBtn.textContent = "Sending... 💌";
+    if (statusDiv) statusDiv.textContent = "";
 
     try {
         if (typeof emailjs !== "undefined") {
@@ -356,17 +353,27 @@ async function sendFeedback(event) {
                 FEEDBACK_TEMPLATE_ID,
                 feedbackParams
             );
-            alert("Thank you for your feedback! 💖");
+
+            if (statusDiv) {
+                statusDiv.style.color = "#d63384";
+                statusDiv.textContent = "Thank you for your feedback! 💖";
+            } else {
+                alert("Thank you for your feedback! 💖");
+            }
+
+            document.getElementById("feedbackName").value = "";
+            document.getElementById("feedbackMessage").value = "";
         } else {
-            alert("EmailJS is not loaded properly.");
+            alert("EmailJS is not loaded. Disable Brave Shields if running locally.");
         }
-
-        document.getElementById("feedbackName").value = "";
-        document.getElementById("feedbackMessage").value = "";
-
     } catch (error) {
         console.error("Feedback sending failed:", error);
-        alert("Failed to send feedback: " + (error.text || error.message || "Unknown error"));
+        if (statusDiv) {
+            statusDiv.style.color = "red";
+            statusDiv.textContent = "Failed to send feedback. Please try again.";
+        } else {
+            alert("Failed to send feedback: " + (error.text || error.message || "Unknown error"));
+        }
     } finally {
         feedbackBtn.disabled = false;
         feedbackBtn.textContent = "Send Feedback 💌";

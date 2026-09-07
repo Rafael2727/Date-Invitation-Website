@@ -9,7 +9,7 @@
     <!-- Main CSS -->
     <link rel="stylesheet" href="style.css" />
 
-    <!-- EmailJS v3 CDN (Stable & Brave-compatible) -->
+    <!-- EmailJS v3 CDN -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 
     <!-- Canvas Confetti CDN -->
@@ -49,7 +49,6 @@
 
         <div class="btn-container">
           <button id="yesBtn" type="button">YES! 🥰</button>
-
           <button id="noBtn" type="button">NO 😜</button>
         </div>
       </section>
@@ -65,21 +64,23 @@
           <span id="displayName" class="highlight-name"></span>!
         </p>
 
-        <!-- DATE -->
-        <label class="label-text" for="datePicker">
-          📅 What day are you available?
-        </label>
+        <!-- DATE PICKER -->
+        <div class="field-group">
+          <label class="label-text" for="datePicker">
+            📅 What day are you available?
+          </label>
+          <input type="date" id="datePicker" required />
+        </div>
 
-        <input type="date" id="datePicker" />
+        <!-- TIME PICKER (Exposed & Styled) -->
+        <div class="field-group">
+          <label class="label-text" for="timePicker">
+            ⏰ What time would you prefer?
+          </label>
+          <input type="time" id="timePicker" required />
+        </div>
 
-        <!-- TIME -->
-        <label class="label-text" for="timePicker">
-          ⏰ What time would you prefer?
-        </label>
-
-        <input type="time" id="timePicker" />
-
-        <!-- LOCATION -->
+        <!-- LOCATION OPTIONS -->
         <h3>📍 Where would you like to eat/go?</h3>
 
         <div class="option-group">
@@ -200,10 +201,7 @@
           </label>
         </div>
 
-        <!-- =========================
-              AFTER EATING ACTIVITY
-            ========================== -->
-
+        <!-- AFTER EATING ACTIVITY -->
         <h3 class="activity-title">🌅 What do you want to do after we eat?</h3>
 
         <div class="activity-options">
@@ -213,7 +211,6 @@
               name="activity"
               value="Walking around Baywalk"
             />
-
             🚶 Walking around Baywalk
           </label>
 
@@ -223,13 +220,11 @@
               name="activity"
               value="Heading to the dockside to hang out"
             />
-
             ⚓ Heading to the dockside to hang out
           </label>
 
           <label class="activity-card">
             <input type="radio" name="activity" value="Watch sunset together" />
-
             🌅 Watch sunset together
           </label>
 
@@ -240,7 +235,6 @@
               value="Other"
               id="otherActivityRadio"
             />
-
             ✨ Something else
           </label>
         </div>
@@ -293,10 +287,7 @@
           <p>I can't wait to spend this special time with you! 😊✨</p>
         </div>
 
-        <!-- =========================
-                FEEDBACK SECTION
-            ========================== -->
-
+        <!-- FEEDBACK SECTION -->
         <div class="feedback-section">
           <h3>💌 Feedback or Suggestions</h3>
 
@@ -316,6 +307,9 @@
           ></textarea>
 
           <button id="feedbackBtn" type="button">Send Feedback 💌</button>
+          
+          <!-- Visual feedback status message box -->
+          <div id="feedbackStatus" class="feedback-status"></div>
         </div>
       </section>
     </main>
