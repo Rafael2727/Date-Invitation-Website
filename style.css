@@ -1,0 +1,422 @@
+* {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(
+        135deg,
+        #ff9a9e 0%,
+        #fecfef 99%,
+        #fecfef 100%
+    );
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0;
+    padding: 20px;
+}
+
+/* =========================================
+   MAIN CARD
+========================================= */
+
+.card {
+    background: rgba(255, 255, 255, 0.96);
+
+    width: 100%;
+    max-width: 550px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    text-align: center;
+
+    position: relative;
+
+    box-shadow:
+        0 10px 25px
+        rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================
+   HEADINGS
+========================================= */
+
+h1,
+h2,
+h3 {
+    color: #d63384;
+    margin-bottom: 20px;
+}
+
+p {
+    color: #555;
+    font-size: 1.05rem;
+}
+
+/* =========================================
+   STEPS VISIBILITY
+========================================= */
+
+.step {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.step.active {
+    display: block;
+    opacity: 1;
+}
+
+/* =========================================
+   HIGHLIGHTED NAME
+========================================= */
+
+.highlight-name {
+    color: #d63384;
+    font-weight: bold;
+}
+
+/* =========================================
+   QUESTION
+========================================= */
+
+.question-text {
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-top: 20px;
+}
+
+/* =========================================
+   FORM INPUTS
+========================================= */
+
+input[type="text"],
+input[type="date"],
+input[type="time"],
+textarea {
+    width: 100%;
+
+    padding: 12px;
+
+    margin: 10px 0 20px;
+
+    border: 2px solid #ffb6c1;
+
+    border-radius: 10px;
+
+    font-size: 1rem;
+
+    outline: none;
+
+    transition: border-color 0.2s;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #d63384;
+}
+
+/* =========================================
+   LABELS
+========================================= */
+
+.label-text {
+    display: block;
+
+    text-align: left;
+
+    font-weight: bold;
+
+    color: #444;
+
+    margin-top: 15px;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+button {
+    background: linear-gradient(
+        to right,
+        #ff416c,
+        #ff4b2b
+    );
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 25px;
+
+    font-size: 1rem;
+
+    font-weight: bold;
+
+    border-radius: 25px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+    margin-top: 10px;
+}
+
+button:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 5px 15px
+        rgba(255, 75, 43, 0.4);
+}
+
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.full-width-btn {
+    width: 100%;
+}
+
+/* =========================================
+   YES / NO BUTTON AREA
+========================================= */
+
+.btn-container {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    margin-top: 20px;
+
+    position: relative;
+
+    min-height: 80px;
+}
+
+/* =========================================
+   NO BUTTON
+========================================= */
+
+#noBtn {
+    background: #888;
+
+    touch-action: none;
+}
+
+#noBtn.dodging {
+    position: absolute;
+}
+
+#noBtn.dodge-pulse {
+    animation: dodgePulse 0.18s ease-out;
+}
+
+@keyframes dodgePulse {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(0.85);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* =========================================
+   LOCATION OPTIONS
+========================================= */
+
+.option-group {
+    text-align: left;
+
+    background: #fff0f5;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    margin-bottom: 15px;
+}
+
+.option-group strong {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.option-group label {
+    display: block;
+
+    margin: 10px 0;
+
+    cursor: pointer;
+}
+
+.option-group input[type="radio"] {
+    margin-right: 10px;
+}
+
+/* =========================================
+   ACTIVITY SECTION
+========================================= */
+
+.activity-title {
+    margin-top: 30px;
+}
+
+.activity-options {
+    display: grid;
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+.activity-card {
+    display: block;
+
+    padding: 15px;
+
+    text-align: left;
+
+    border-radius: 12px;
+
+    background: #fff0f5;
+
+    border: 2px solid transparent;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        border-color 0.2s,
+        background 0.2s;
+}
+
+.activity-card:hover {
+    border-color: #ff6b9d;
+
+    transform: translateY(-2px);
+}
+
+.activity-card:has(input:checked) {
+    border-color: #d63384;
+
+    background: #ffe0ec;
+}
+
+.activity-card input {
+    margin-right: 10px;
+}
+
+/* =========================================
+   THANK YOU SECTION
+========================================= */
+
+.thank-you-box {
+    background: linear-gradient(
+        135deg,
+        #fff0f5,
+        #ffe4ec
+    );
+
+    padding: 25px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(214, 51, 132, 0.15);
+}
+
+.thank-you-text {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* =========================================
+   SUMMARY BOX
+========================================= */
+
+.summary-box {
+    background: #ffffff;
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    text-align: left;
+
+    margin: 20px 0;
+}
+
+.summary-box p {
+    margin: 10px 0;
+}
+
+/* =========================================
+   FEEDBACK
+========================================= */
+
+.feedback-section {
+    margin-top: 25px;
+
+    padding-top: 20px;
+
+    border-top:
+        2px dashed #ffb6c1;
+}
+
+.small-text {
+    font-size: 0.9rem;
+    color: #777;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+        align-items: flex-start;
+    }
+
+    .card {
+        padding: 20px;
+        margin-top: 10px;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    .btn-container {
+        gap: 10px;
+    }
+
+    button {
+        width: 100%;
+    }
+}

@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>Will You Go Out With Me?</title>
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- EmailJS v3 CDN (Stable & Brave-compatible) -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  </head>
+
+  <body>
+    <main class="card">
+      <!-- =========================
+            STEP 1: ENTER NAME
+        ========================== -->
+      <section id="step1" class="step active">
+        <h1>Hello There! 💕</h1>
+
+        <p>Please enter your name to continue:</p>
+
+        <input
+          type="text"
+          id="userName"
+          placeholder="Your Name..."
+          autocomplete="name"
+        />
+
+        <button id="nextNameBtn" type="button">Next ➔</button>
+      </section>
+
+      <!-- =========================
+            STEP 2: YES / NO
+        ========================== -->
+      <section id="step2" class="step">
+        <h1>
+          Hi
+          <span id="askName" class="highlight-name"></span>! ✨
+        </h1>
+
+        <p class="question-text">Would you like to go out with me?</p>
+
+        <div class="btn-container">
+          <button id="yesBtn" type="button">YES! 🥰</button>
+
+          <button id="noBtn" type="button">NO 😜</button>
+        </div>
+      </section>
+
+      <!-- =========================
+            STEP 3: DATE DETAILS
+        ========================== -->
+      <section id="step3" class="step">
+        <h2>Yay! I'm so happy! 🎉</h2>
+
+        <p>
+          Let's plan our date,
+          <span id="displayName" class="highlight-name"></span>!
+        </p>
+
+        <!-- DATE -->
+        <label class="label-text" for="datePicker">
+          📅 What day are you available?
+        </label>
+
+        <input type="date" id="datePicker" />
+
+        <!-- TIME -->
+        <label class="label-text" for="timePicker">
+          ⏰ What time would you prefer?
+        </label>
+
+        <input type="time" id="timePicker" />
+
+        <!-- LOCATION -->
+        <h3>📍 Where would you like to eat/go?</h3>
+
+        <div class="option-group">
+          <strong>🏛️ Food Court Baywalk Masinloc</strong>
+
+          <label>
+            <input type="radio" name="place" value="Baywalk - Marcielicious" />
+            Marcielicious
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Baywalk - Soulmate" />
+            Soulmate
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Baywalk - Chryz Café" />
+            Chryz Café
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Baywalk - Itidakimasu" />
+            Itidakimasu
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="place"
+              value="Baywalk - Coffee Shop DIWAN"
+            />
+            Coffee Shop DIWAN
+          </label>
+        </div>
+
+        <div class="option-group">
+          <strong>🍢 Other Local Options</strong>
+
+          <label>
+            <input
+              type="radio"
+              name="place"
+              value="Baywalk outside food stalls / Street foods"
+            />
+            Baywalk outside food stalls / Street foods
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Masinloc Mall Food Court" />
+            Masinloc Mall Food Court
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Sorbetes" />
+            Sorbetes
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Frappéy" />
+            Frappéy
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Icylicious Cafe" />
+            Icylicious Cafe
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="UNLI Samgyupsal 199" />
+            UNLI Samgyupsal 199
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Kapeyaree-Mall" />
+            Kapeyaree-Mall
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Kapeyaree-Inhobol" />
+            Kapeyaree-Inhobol
+          </label>
+        </div>
+
+        <div class="option-group">
+          <strong>🍔 Fast Food (Iba Zambales)</strong>
+
+          <label>
+            <input
+              type="radio"
+              name="place"
+              value="Iba Zambales - Mang Inasal"
+            />
+            Mang Inasal
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Iba Zambales - Greenwich" />
+            Greenwich
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Iba Zambales - Jollibee" />
+            Jollibee
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="place"
+              value="Iba Zambales - McDonald's"
+            />
+            McDonald's
+          </label>
+
+          <label>
+            <input type="radio" name="place" value="Iba Zambales - KFC" />
+            KFC
+          </label>
+        </div>
+
+        <!-- =========================
+              AFTER EATING ACTIVITY
+            ========================== -->
+
+        <h3 class="activity-title">🌅 What do you want to do after we eat?</h3>
+
+        <div class="activity-options">
+          <label class="activity-card">
+            <input
+              type="radio"
+              name="activity"
+              value="Walking around Baywalk"
+            />
+
+            🚶 Walking around Baywalk
+          </label>
+
+          <label class="activity-card">
+            <input
+              type="radio"
+              name="activity"
+              value="Heading to the dockside to hang out"
+            />
+
+            ⚓ Heading to the dockside to hang out
+          </label>
+
+          <label class="activity-card">
+            <input type="radio" name="activity" value="Watch sunset together" />
+
+            🌅 Watch sunset together
+          </label>
+
+          <label class="activity-card">
+            <input
+              type="radio"
+              name="activity"
+              value="Other"
+              id="otherActivityRadio"
+            />
+
+            ✨ Something else
+          </label>
+        </div>
+
+        <!-- CUSTOM ACTIVITY -->
+        <input
+          type="text"
+          id="customActivity"
+          placeholder="If you want something else, specify here..."
+        />
+
+        <button id="submitBtn" type="button" class="full-width-btn">Submit Choice ❤️</button>
+      </section>
+
+      <!-- =========================
+            STEP 4: THANK YOU
+        ========================== -->
+      <section id="step4" class="step">
+        <div class="thank-you-box">
+          <h1>Thank You! 💖🎉</h1>
+
+          <p class="thank-you-text">
+            I am so excited and really appreciate you saying yes,
+            <span id="finalName" class="highlight-name"></span>!
+          </p>
+
+          <!-- SUMMARY -->
+          <div class="summary-box">
+            <p>
+              <strong>📅 Date:</strong>
+              <span id="summaryDate"></span>
+            </p>
+
+            <p>
+              <strong>⏰ Time:</strong>
+              <span id="summaryTime"></span>
+            </p>
+
+            <p>
+              <strong>📍 Location:</strong>
+              <span id="summaryPlace"></span>
+            </p>
+
+            <p>
+              <strong>🌅 What's Next:</strong>
+              <span id="summaryActivity"></span>
+            </p>
+          </div>
+
+          <p>I can't wait to spend this special time with you! 😊✨</p>
+        </div>
+
+        <!-- =========================
+                FEEDBACK SECTION
+            ========================== -->
+
+        <div class="feedback-section">
+          <h3>💌 Feedback or Suggestions</h3>
+
+          <p class="small-text">
+            Want to suggest something for this invitation or our date?
+          </p>
+
+          <input
+            type="text"
+            id="feedbackName"
+            placeholder="Your name (optional)"
+          />
+
+          <textarea
+            id="feedbackMessage"
+            placeholder="Write your feedback or suggestion here..."
+          ></textarea>
+
+          <button id="feedbackBtn" type="button">Send Feedback 💌</button>
+        </div>
+      </section>
+    </main>
+
+    <!-- Main JavaScript File -->
+    <script src="index.js"></script>
+  </body>
+</html>
