@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
     <title>Will You Go Out With Me?</title>
 
     <!-- Main CSS -->
@@ -31,6 +30,7 @@
           id="userName"
           placeholder="Your Name..."
           autocomplete="name"
+          required
         />
 
         <button id="nextNameBtn" type="button">Next ➔</button>
@@ -72,7 +72,7 @@
           <input type="date" id="datePicker" required />
         </div>
 
-        <!-- TIME PICKER (Exposed & Styled) -->
+        <!-- TIME PICKER -->
         <div class="field-group">
           <label class="label-text" for="timePicker">
             ⏰ What time would you prefer?
@@ -88,22 +88,22 @@
 
           <label>
             <input type="radio" name="place" value="Baywalk - Marcielicious" />
-            Marcielicious
+            1. Marcielicious
           </label>
 
           <label>
             <input type="radio" name="place" value="Baywalk - Soulmate" />
-            Soulmate
+            2. Soulmate
           </label>
 
           <label>
             <input type="radio" name="place" value="Baywalk - Chryz Café" />
-            Chryz Café
+            3. Chryz Café
           </label>
 
           <label>
             <input type="radio" name="place" value="Baywalk - Itidakimasu" />
-            Itidakimasu
+            4. Itidakimasu
           </label>
 
           <label>
@@ -112,7 +112,7 @@
               name="place"
               value="Baywalk - Coffee Shop DIWAN"
             />
-            Coffee Shop DIWAN
+            5. Coffee Shop DIWAN
           </label>
         </div>
 
@@ -307,8 +307,7 @@
           ></textarea>
 
           <button id="feedbackBtn" type="button">Send Feedback 💌</button>
-          
-          <!-- Visual feedback status message box -->
+
           <div id="feedbackStatus" class="feedback-status"></div>
         </div>
       </section>

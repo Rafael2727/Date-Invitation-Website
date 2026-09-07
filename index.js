@@ -288,7 +288,7 @@ async function finishSelection(event) {
 }
 
 /* =========================================
-   CONFETTI CELEBRATION (FIXED & RELIABLE)
+   CONFETTI CELEBRATION
 ========================================= */
 function celebrate() {
     const confettiFunc = window.confetti || (typeof confetti !== "undefined" ? confetti : null);
@@ -364,7 +364,7 @@ async function sendFeedback(event) {
             document.getElementById("feedbackName").value = "";
             document.getElementById("feedbackMessage").value = "";
         } else {
-            alert("EmailJS is not loaded. Disable Brave Shields if running locally.");
+            alert("EmailJS is not loaded properly. Disable Brave Shields if running locally.");
         }
     } catch (error) {
         console.error("Feedback sending failed:", error);
